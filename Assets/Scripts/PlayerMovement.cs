@@ -6,10 +6,18 @@ public class PlayerMovement : MonoBehaviour
 
     public float forwardForce = 2000f;
     public float sidewaysForce = 500f;
+    GameManager gameManager;
+
+        void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (gameManager.State != GameManager.GameState.Playing) return;
+
         rb.AddForce(0, 0, forwardForce * Time.deltaTime);
 
         if (Input.GetKey("d"))
@@ -24,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb.position.y < -1f)
         {
-            FindObjectOfType<GameManager>().EndGame();
+            gameManager.EndGame();
         }
     }
 }
