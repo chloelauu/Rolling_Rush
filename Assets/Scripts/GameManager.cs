@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    bool gameHasEnded = false;
+    public enum GameState { Playing, Won, Lost }
+    public GameState State { get; private set; } = GameState.Playing;
 
     public float restartDelay = 1f;
 
@@ -11,17 +12,16 @@ public class GameManager : MonoBehaviour
 
     public void CompleteLevel()
     {
+        if (State != GameState.Playing) return;
+        State = GameState.Won;
         completeLevelUI.SetActive(true);
     }
 
     public void EndGame()
     {
-        if (gameHasEnded == false)
-        {
-            gameHasEnded = true;
-            Debug.Log("game over");
-            Invoke("Restart", restartDelay);
-        }
+        if (State != GameState.Playing) return;
+        State = GameState.Lost;
+        Invoke(nameof(Restart), restartDelay);
     }
 
     void Restart()
