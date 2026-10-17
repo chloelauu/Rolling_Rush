@@ -8,4 +8,5 @@ public class LevelSettings : ScriptableObject
     public float forwardForce = 2000f;
     public float sidewaysForce = 500f;
     public float restartDelay = 1f;
+    public string levelName = "Level 1";
 }

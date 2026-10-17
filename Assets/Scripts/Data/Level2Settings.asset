@@ -15,3 +15,4 @@ MonoBehaviour:
   forwardForce: 4500
   sidewaysForce: 150
   restartDelay: 1
+  levelName: Level 2
