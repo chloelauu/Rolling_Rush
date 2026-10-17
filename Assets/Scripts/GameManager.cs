@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
         Time.timeScale = 1f;
         levelText.text = settings.levelName;
     }
