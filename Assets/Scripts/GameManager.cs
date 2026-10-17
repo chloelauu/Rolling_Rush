@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
     public TMP_Text distanceText;
     public TMP_Text bestText;
+    float crashDistance;
 
     public void Start()
     {
@@ -33,13 +34,14 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         State = GameState.Lost;
+        crashDistance = player.position.z;
         Invoke(nameof(ShowGameOver), settings.restartDelay);
     }
 
     void ShowGameOver()
     {
-        float distance = player.position.z;
-
+        float distance = crashDistance;
+        
         string key = "Best_" + SceneManager.GetActiveScene().name;
         float best = PlayerPrefs.GetFloat(key, 0f);
         bool newBest = distance > best;

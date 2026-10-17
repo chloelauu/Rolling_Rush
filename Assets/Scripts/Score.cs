@@ -4,16 +4,18 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     Transform player;
+    GameManager gameManager;
     public Text scoreText;
-
-    // Update is called once per frame
-    void Update()
-    {
-        scoreText.text = player.position.z.ToString("0");
-    }
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
+    void Update()
+    {
+        if (gameManager.State != GameManager.GameState.Playing) return;
+        scoreText.text = player.position.z.ToString("0");
     }
 }
