@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject pauseButton;
     public LevelSettings settings;
     public TMP_Text levelText;
+    public Transform player;
+    public GameObject gameOverUI;
+    public TMP_Text distanceText;
+    public TMP_Text bestText;
 
     public void Start()
     {
@@ -22,6 +26,36 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
+    }
+
+    public void EndGame()
+    {
+        if (State != GameState.Playing) return;
+        State = GameState.Lost;
+        Invoke(nameof(ShowGameOver), settings.restartDelay);
+    }
+
+    void ShowGameOver()
+    {
+        float distance = player.position.z;
+
+        string key = "Best_" + SceneManager.GetActiveScene().name;
+        float best = PlayerPrefs.GetFloat(key, 0f);
+        bool newBest = distance > best;
+
+        if (newBest)
+        {
+            best = distance;
+            PlayerPrefs.SetFloat(key, best);
+            PlayerPrefs.Save();
+        }
+
+        distanceText.text = "Distance: " + distance.ToString("0");
+        bestText.text = newBest ? "New best: " + best.ToString("0") + "!" : "Best: " + best.ToString("0");
+
+        pauseButton.SetActive(false);
+        levelText.gameObject.SetActive(false);
+        gameOverUI.SetActive(true);
     }
 
     public void TogglePause()
@@ -68,17 +102,5 @@ public class GameManager : MonoBehaviour
         completeLevelUI.SetActive(true);
         levelText.gameObject.SetActive(false);
         pauseButton.SetActive(false);
-    }
-
-    public void EndGame()
-    {
-        if (State != GameState.Playing) return;
-        State = GameState.Lost;
-        Invoke(nameof(Restart), settings.restartDelay);
-    }
-
-    void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
