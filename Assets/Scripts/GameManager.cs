@@ -6,9 +6,8 @@ public class GameManager : MonoBehaviour
     public enum GameState { Playing, Won, Lost }
     public GameState State { get; private set; } = GameState.Playing;
 
-    public float restartDelay = 1f;
-
     public GameObject completeLevelUI;
+    public LevelSettings settings;
 
     public void CompleteLevel()
     {
@@ -21,7 +20,7 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         State = GameState.Lost;
-        Invoke(nameof(Restart), restartDelay);
+        Invoke(nameof(Restart), settings.restartDelay);
     }
 
     void Restart()
