@@ -23,4 +23,6 @@ public class LevelSettings : ScriptableObject
     public float rowSpacing = 30f;      // distance between rows (smaller = harder)
     public int minBlocksPerRow = 1;
     public int maxBlocksPerRow = 2;
+    [Range(0f, 1f)] public float gateChance = 0f;
+    [Range(0f, 1f)] public float sliderChance = 0f;
 }

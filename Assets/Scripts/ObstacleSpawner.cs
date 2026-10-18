@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour
 {
     public GameObject obstaclePrefab;
+    public GameObject sliderPrefab;
     public float[] lanes = { -6f, -3f, 0f, 3f, 6f };  // x positions across the track
     public float obstacleY = 1f;                       // height to place blocks at
 
@@ -28,7 +29,22 @@ public class ObstacleSpawner : MonoBehaviour
 
     void SpawnRow(float z, LevelSettings s)
     {
-        int count = Random.Range(s.minBlocksPerRow, s.maxBlocksPerRow + 1);
+        float roll = Random.value;
+
+        // slider row: one block in the middle that slides side to side
+        if (roll < s.sliderChance)
+        {
+            Instantiate(sliderPrefab, new Vector3(0f, obstacleY, z), Quaternion.identity);
+            return;
+        }
+
+        // gate row: every lane blocked except one
+        int count;
+        if (roll < s.sliderChance + s.gateChance)
+            count = lanes.Length - 1;
+        else
+            count = Random.Range(s.minBlocksPerRow, s.maxBlocksPerRow + 1);
+
         count = Mathf.Min(count, lanes.Length - 1);   // always leave at least one gap
 
         // shuffle the lane order, then fill the first `count` lanes

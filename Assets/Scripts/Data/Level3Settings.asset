@@ -25,3 +25,5 @@ MonoBehaviour:
   rowSpacing: 30
   minBlocksPerRow: 1
   maxBlocksPerRow: 2
+  gateChance: 0.2
+  sliderChance: 0.2
