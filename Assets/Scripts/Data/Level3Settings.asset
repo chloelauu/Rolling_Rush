@@ -20,3 +20,8 @@ MonoBehaviour:
   trackMaterial: {fileID: 2100000, guid: b60a57775ff596b4994e701c67093a7b, type: 2}
   obstacleMaterial: {fileID: 2100000, guid: 1fbc75b654d438d4ea78a43178769859, type: 2}
   skyColor: {r: 0.22745098, g: 0.0627451, b: 0.1254902, a: 1}
+  levelLength: 1200
+  firstRowZ: 40
+  rowSpacing: 30
+  minBlocksPerRow: 1
+  maxBlocksPerRow: 2

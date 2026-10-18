@@ -2765,6 +2765,7 @@ GameObject:
   - component: {fileID: 7244450072586340366}
   - component: {fileID: 5782357311748947772}
   - component: {fileID: 5269982821043659441}
+  - component: {fileID: 6967416689520036780}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2829,6 +2830,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogStart: 40
   fogEnd: 120
+--- !u!114 &6967416689520036780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140509315335726014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0603c58c4890f41975deaa121b7af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefab: {fileID: 3012472112642124238, guid: 271c1d4fe7a1195429b6a32f40888493, type: 3}
+  lanes:
+  - -6
+  - -3
+  - 0
+  - 3
+  - 6
+  obstacleY: 1
 --- !u!1 &3300420632139100503
 GameObject:
   m_ObjectHideFlags: 0

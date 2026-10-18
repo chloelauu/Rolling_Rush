@@ -16,4 +16,11 @@ public class LevelSettings : ScriptableObject
     public Material trackMaterial;
     public Material obstacleMaterial;
     public Color skyColor = new Color32(0x0F, 0x3B, 0x6E, 255);
+
+    [Header("Spawner")]
+    public float levelLength = 500f;    // where the finish line goes
+    public float firstRowZ = 40f;       // empty run-up before the first row
+    public float rowSpacing = 30f;      // distance between rows (smaller = harder)
+    public int minBlocksPerRow = 1;
+    public int maxBlocksPerRow = 2;
 }
