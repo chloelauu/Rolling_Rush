@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Credits : MonoBehaviour
@@ -6,5 +7,10 @@ public class Credits : MonoBehaviour
     {
         Debug.Log("QUIT");
         Application.Quit();
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
