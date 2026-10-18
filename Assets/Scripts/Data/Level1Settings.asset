@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d320f64649a458547b21a4ac8f1c9498, type: 3}
   m_Name: Level1Settings
   m_EditorClassIdentifier: 
-  forwardForce: 4000
+  forwardForce: 2200
   sidewaysForce: 100
   restartDelay: 1
   levelName: SHEET 01 / 03
@@ -20,3 +20,12 @@ MonoBehaviour:
   trackMaterial: {fileID: 2100000, guid: e4b89a4b9c8b4634fbc64144bb01b123, type: 2}
   obstacleMaterial: {fileID: 2100000, guid: 7cd93e765e5a9d647b9173fd2734f615, type: 2}
   skyColor: {r: 0.05882353, g: 0.23137255, b: 0.43137255, a: 1}
+  levelLength: 500
+  firstRowZ: 40
+  rowSpacing: 30
+  minBlocksPerRow: 1
+  maxBlocksPerRow: 2
+  gateChance: 0
+  sliderChance: 0
+  sweeperChance: 0
+  dropChance: 0

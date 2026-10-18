@@ -25,4 +25,6 @@ public class LevelSettings : ScriptableObject
     public int maxBlocksPerRow = 2;
     [Range(0f, 1f)] public float gateChance = 0f;
     [Range(0f, 1f)] public float sliderChance = 0f;
+    [Range(0f, 1f)] public float sweeperChance = 0f;
+    [Range(0f, 1f)] public float dropChance = 0f;
 }

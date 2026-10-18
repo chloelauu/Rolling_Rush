@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d320f64649a458547b21a4ac8f1c9498, type: 3}
   m_Name: Level2Settings
   m_EditorClassIdentifier: 
-  forwardForce: 4500
-  sidewaysForce: 150
+  forwardForce: 2400
+  sidewaysForce: 100
   restartDelay: 1
   levelName: SHEET 02 / 03
   newHazard: 'NEW: SLIDERS + GATES'
@@ -27,3 +27,5 @@ MonoBehaviour:
   maxBlocksPerRow: 2
   gateChance: 0.25
   sliderChance: 0.3
+  sweeperChance: 0
+  dropChance: 0

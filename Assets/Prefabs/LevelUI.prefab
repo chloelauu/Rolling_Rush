@@ -337,7 +337,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 68262311531034139, guid: ba86e3d5834c64b4aa407f15028092af, type: 3}
+      - m_Target: {fileID: 5782357311748947772}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GoToMenu
         m_Mode: 1
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 68262311531034139, guid: ba86e3d5834c64b4aa407f15028092af, type: 3}
+      - m_Target: {fileID: 5782357311748947772}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartLevel
         m_Mode: 1
@@ -2844,6 +2844,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 3012472112642124238, guid: 271c1d4fe7a1195429b6a32f40888493, type: 3}
   sliderPrefab: {fileID: 3285784296664190294, guid: cbd8c119972845644ad94f979ce3a75d, type: 3}
+  sweeperPrefab: {fileID: 5912968468016944176, guid: 0b7e1e88303b9f64db9909d35920d3b1, type: 3}
+  dropPrefab: {fileID: 8119895619328847904, guid: 643e163f9b3ac1f4f899df5f85e0a602, type: 3}
+  dropHeight: 12
   lanes:
   - -6
   - -3
@@ -3473,7 +3476,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 68262311531034139, guid: ba86e3d5834c64b4aa407f15028092af, type: 3}
+      - m_Target: {fileID: 5782357311748947772}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1

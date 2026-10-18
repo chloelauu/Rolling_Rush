@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
         bool hasHazard = settings.newHazard != "";
         hazardText.text = settings.newHazard;
         hazardText.gameObject.SetActive(hasHazard);
-        if (hasHazard) Invoke(nameof(HideHazard), 4f);
     }
 
     public void Update()

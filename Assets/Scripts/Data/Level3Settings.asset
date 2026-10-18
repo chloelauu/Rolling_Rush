@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d320f64649a458547b21a4ac8f1c9498, type: 3}
   m_Name: Level3Settings
   m_EditorClassIdentifier: 
-  forwardForce: 5000
-  sidewaysForce: 200
+  forwardForce: 2500
+  sidewaysForce: 110
   restartDelay: 1
   levelName: SHEET 03 / 03
   newHazard: 'NEW: SWEEPERS + DROPS'
@@ -25,5 +25,7 @@ MonoBehaviour:
   rowSpacing: 30
   minBlocksPerRow: 1
   maxBlocksPerRow: 2
-  gateChance: 0.2
-  sliderChance: 0.2
+  gateChance: 0.15
+  sliderChance: 0.15
+  sweeperChance: 0.2
+  dropChance: 0.2
