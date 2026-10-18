@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text crashTitle;
     public TMP_Text reportHeader;
     public GameObject newRecordStamp;
+    public TMP_Text completeHeader;
     float crashDistance;
 
     public void Start()
@@ -128,5 +129,14 @@ public class GameManager : MonoBehaviour
         levelText.transform.parent.gameObject.SetActive(false);
         hazardText.gameObject.SetActive(false);
         pauseButton.SetActive(false);
+
+        completeHeader.text = "TEST REPORT · " + settings.levelName;
+        scoreText.SetActive(false);
+        Invoke(nameof(LoadNextLevel), 2.5f);
+    }
+
+    void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
