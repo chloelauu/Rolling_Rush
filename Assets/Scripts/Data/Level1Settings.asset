@@ -17,3 +17,6 @@ MonoBehaviour:
   restartDelay: 1
   levelName: SHEET 01 / 03
   newHazard: 
+  trackMaterial: {fileID: 2100000, guid: e4b89a4b9c8b4634fbc64144bb01b123, type: 2}
+  obstacleMaterial: {fileID: 2100000, guid: 7cd93e765e5a9d647b9173fd2734f615, type: 2}
+  skyColor: {r: 0.05882353, g: 0.23137255, b: 0.43137255, a: 1}
