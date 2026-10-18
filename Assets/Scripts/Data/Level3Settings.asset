@@ -15,4 +15,5 @@ MonoBehaviour:
   forwardForce: 5000
   sidewaysForce: 200
   restartDelay: 1
-  levelName: Level 3
+  levelName: SHEET 03 / 03
+  newHazard: "\tNEW: SWEEPERS + DROPS"

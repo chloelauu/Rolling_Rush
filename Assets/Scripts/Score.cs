@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Score : MonoBehaviour
 {
     Transform player;
     GameManager gameManager;
-    public Text scoreText;
+    public TMP_Text scoreText;
 
     void Start()
     {
@@ -16,6 +17,6 @@ public class Score : MonoBehaviour
     void Update()
     {
         if (gameManager.State != GameManager.GameState.Playing) return;
-        scoreText.text = player.position.z.ToString("0");
+        scoreText.text = player.position.z.ToString("0") + "<size=45%><color=#9EC3F0> m</color></size>";
     }
 }

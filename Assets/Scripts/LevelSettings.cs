@@ -9,4 +9,5 @@ public class LevelSettings : ScriptableObject
     public float sidewaysForce = 500f;
     public float restartDelay = 1f;
     public string levelName = "Level 1";
+    public string newHazard = "";
 }

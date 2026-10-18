@@ -12,10 +12,12 @@ public class GameManager : MonoBehaviour
     public GameObject pauseButton;
     public LevelSettings settings;
     public TMP_Text levelText;
+    public TMP_Text hazardText;
     public Transform player;
     public GameObject gameOverUI;
     public TMP_Text distanceText;
     public TMP_Text bestText;
+    public GameObject scoreText;
     float crashDistance;
 
     public void Start()
@@ -23,11 +25,20 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         Time.timeScale = 1f;
         levelText.text = settings.levelName;
+        bool hasHazard = settings.newHazard != "";
+        hazardText.text = settings.newHazard;
+        hazardText.gameObject.SetActive(hasHazard);
+        if (hasHazard) Invoke(nameof(HideHazard), 4f);
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
+    }
+
+    public void HideHazard()
+    {
+        hazardText.gameObject.SetActive(false);
     }
 
     public void EndGame()
@@ -57,7 +68,9 @@ public class GameManager : MonoBehaviour
         bestText.text = newBest ? "New best: " + best.ToString("0") + "!" : "Best: " + best.ToString("0");
 
         pauseButton.SetActive(false);
-        levelText.gameObject.SetActive(false);
+        levelText.transform.parent.gameObject.SetActive(false);
+        scoreText.SetActive(false);
+        hazardText.gameObject.SetActive(false);
         gameOverUI.SetActive(true);
     }
 
@@ -103,7 +116,8 @@ public class GameManager : MonoBehaviour
         if (State != GameState.Playing) return;
         State = GameState.Won;
         completeLevelUI.SetActive(true);
-        levelText.gameObject.SetActive(false);
+        levelText.transform.parent.gameObject.SetActive(false);
+        hazardText.gameObject.SetActive(false);
         pauseButton.SetActive(false);
     }
 }
