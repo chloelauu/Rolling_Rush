@@ -17,7 +17,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
     public TMP_Text distanceText;
     public TMP_Text bestText;
+    public TMP_Text pauseTimeText;
     public GameObject scoreText;
+    public TMP_Text crashTitle;
+    public TMP_Text reportHeader;
+    public GameObject newRecordStamp;
     float crashDistance;
 
     public void Start()
@@ -41,10 +45,11 @@ public class GameManager : MonoBehaviour
         hazardText.gameObject.SetActive(false);
     }
 
-    public void EndGame()
+    public void EndGame(bool fell = false)
     {
         if (State != GameState.Playing) return;
         State = GameState.Lost;
+        crashTitle.text = fell ? "LEFT THE SHEET" : "COLLISION DETECTED";
         crashDistance = player.position.z;
         Invoke(nameof(ShowGameOver), settings.restartDelay);
     }
@@ -64,8 +69,10 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        distanceText.text = "Distance: " + distance.ToString("0");
-        bestText.text = newBest ? "New best: " + best.ToString("0") + "!" : "Best: " + best.ToString("0");
+        reportHeader.text = "TEST REPORT · " + settings.levelName;
+        distanceText.text = distance.ToString("0") + " m";
+        bestText.text = best.ToString("0") + " m";
+        newRecordStamp.SetActive(newBest);
 
         pauseButton.SetActive(false);
         levelText.transform.parent.gameObject.SetActive(false);
@@ -85,6 +92,8 @@ public class GameManager : MonoBehaviour
         if (State != GameState.Playing) return;
         State = GameState.Paused;
         Time.timeScale = 0f;
+        float t = Time.timeSinceLevelLoad;
+        pauseTimeText.text = "T = " + ((int)(t / 60)).ToString("00") + ":" + (t % 60).ToString("00.0");
         pauseUI.SetActive(true);
         pauseButton.SetActive(false);
     }
