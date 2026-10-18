@@ -868,6 +868,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5269982821043659441, guid: 35099b691c5a5db4c8bbdedcb558ad2d, type: 3}
+      propertyPath: fogStart
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 5782357311748947772, guid: 35099b691c5a5db4c8bbdedcb558ad2d, type: 3}
       propertyPath: player
       value: 
