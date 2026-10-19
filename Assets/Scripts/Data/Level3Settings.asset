@@ -29,3 +29,4 @@ MonoBehaviour:
   sliderChance: 0.15
   sweeperChance: 0.2
   dropChance: 0.2
+  isFinalLevel: 1

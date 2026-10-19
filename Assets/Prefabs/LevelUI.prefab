@@ -2310,12 +2310,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 110
+  m_fontSize: 100
   m_fontSizeBase: 110
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 60
+  m_fontSizeMax: 110
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2326,7 +2326,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2816,6 +2816,8 @@ MonoBehaviour:
   reportHeader: {fileID: 1460151015838265943}
   newRecordStamp: {fileID: 1708750684441677630}
   completeHeader: {fileID: 5597430931872014024}
+  completeTitle: {fileID: 4277141680113885344}
+  completeSubtitle: {fileID: 4560474466168715010}
 --- !u!114 &5269982821043659441
 MonoBehaviour:
   m_ObjectHideFlags: 0

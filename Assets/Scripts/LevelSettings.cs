@@ -27,4 +27,5 @@ public class LevelSettings : ScriptableObject
     [Range(0f, 1f)] public float sliderChance = 0f;
     [Range(0f, 1f)] public float sweeperChance = 0f;
     [Range(0f, 1f)] public float dropChance = 0f;
+    public bool isFinalLevel = false;
 }

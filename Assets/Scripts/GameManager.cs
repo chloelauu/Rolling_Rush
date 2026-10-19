@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text reportHeader;
     public GameObject newRecordStamp;
     public TMP_Text completeHeader;
+    public TMP_Text completeTitle;
+    public TMP_Text completeSubtitle;
     float crashDistance;
 
     public void Start()
@@ -38,11 +40,29 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
+
+    #if UNITY_EDITOR
+        // debug shortcuts (editor only, not included in builds)
+        if (Input.GetKeyDown(KeyCode.F1)) CompleteLevel();   // instant level complete
+        if (Input.GetKeyDown(KeyCode.F2)) EndGame();         // instant game over
+    #endif
     }
 
     public void HideHazard()
     {
         hazardText.gameObject.SetActive(false);
+    }
+
+    bool SaveBest(float distance, out float best)
+    {
+        string key = "Best_" + SceneManager.GetActiveScene().name;
+        best = PlayerPrefs.GetFloat(key, 0f);
+        if (distance <= best) return false;
+
+        best = distance;
+        PlayerPrefs.SetFloat(key, best);
+        PlayerPrefs.Save();
+        return true;
     }
 
     public void EndGame(bool fell = false)
@@ -57,17 +77,7 @@ public class GameManager : MonoBehaviour
     void ShowGameOver()
     {
         float distance = crashDistance;
-        
-        string key = "Best_" + SceneManager.GetActiveScene().name;
-        float best = PlayerPrefs.GetFloat(key, 0f);
-        bool newBest = distance > best;
-
-        if (newBest)
-        {
-            best = distance;
-            PlayerPrefs.SetFloat(key, best);
-            PlayerPrefs.Save();
-        }
+        bool newBest = SaveBest(distance, out float best);
 
         reportHeader.text = "TEST REPORT · " + settings.levelName;
         distanceText.text = distance.ToString("0") + " m";
@@ -124,14 +134,25 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         State = GameState.Won;
+        SaveBest(player.position.z, out _);
+
         completeLevelUI.SetActive(true);
         levelText.transform.parent.gameObject.SetActive(false);
         hazardText.gameObject.SetActive(false);
         pauseButton.SetActive(false);
-
-        completeHeader.text = "TEST REPORT · " + settings.levelName;
         scoreText.SetActive(false);
-        Invoke(nameof(LoadNextLevel), 2.5f);
+        completeHeader.text = "TEST REPORT · " + settings.levelName;
+
+        if (settings.isFinalLevel)
+        {
+            completeTitle.text = "PROJECT APPROVED";
+            completeSubtitle.text = "All 3 sheets complete · Thanks for testing";
+            Invoke(nameof(LoadNextLevel), 4f);
+        }
+        else
+        {
+            Invoke(nameof(LoadNextLevel), 2.5f);
+        }
     }
 
     void LoadNextLevel()
