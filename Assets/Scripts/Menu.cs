@@ -7,10 +7,6 @@ public class Menu : MonoBehaviour
     public TMP_Text bestValue;
     public GameObject quitButton;
 
-    // inside Start(), add:
-    #if UNITY_WEBGL
-        quitButton.SetActive(false);   // web pages can't close themselves, so hide it
-    #endif
 
     void Start()
     {
@@ -20,6 +16,10 @@ public class Menu : MonoBehaviour
             PlayerPrefs.GetFloat("Best_DodgeZoneLvl3", 0f));
 
         bestValue.text = best > 0f ? best.ToString("0") + " m" : "--";
+// inside Start(), add:
+#if UNITY_WEBGL
+    quitButton.SetActive(false);   // web pages can't close themselves, so hide it
+#endif
     }
 
     public void QuitGame()
