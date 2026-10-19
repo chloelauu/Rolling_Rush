@@ -66,6 +66,12 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
         if (I != this) return;
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F3))
+            ScreenCapture.CaptureScreenshot("Screenshot_" + System.DateTime.Now.Ticks + ".png", 2);
+            if (Input.GetKeyDown(KeyCode.F4)) { PlayerPrefs.DeleteAll(); Debug.Log("Scores reset"); }
+#endif
         // smoothly move towards the target volume (works even when the game is paused)
         musicSource.volume = Mathf.MoveTowards(musicSource.volume, target, fadeSpeed * Time.unscaledDeltaTime);
     }
