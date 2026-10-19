@@ -1,7 +1,5 @@
 # Rolling Rush
 
-![Rolling Rush cover](Thumbnails/RollingRush_card_1000x1000.png)
-
 A short 3D physics dodging game styled as an engineering blueprint. Steer a ball through three "test sheets", each adding a new hazard, and set your best distance.
 
 **[▶ Play in browser on itch.io](https://chloludev.itch.io/rolling-rush)** · Windows download available on the same page
