@@ -38,6 +38,7 @@ public class StampSlam : MonoBehaviour
         }
         transform.localScale = Vector3.one;
         group.alpha = 1f;
+        AudioManager.Play(AudioManager.Sfx.Stamp);
 
         // little shake on impact
         if (shakeTarget != null)

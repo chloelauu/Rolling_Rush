@@ -1,17 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     public enum Sfx { Click, Crash, Fall, Stamp, Complete }
 
-    public static AudioManager I;
+    public static AudioManager I;   // the one AudioManager in charge (singleton)
 
     public AudioSource musicSource;
     public AudioSource sfxSource;
     public AudioClip music, click, crash, fall, stamp, complete;
-    public float musicVolume = 0.5f;
+
+    [Header("Music volume")]
+    public float menuVolume = 0.5f;    // menu and credits
+    public float levelVolume = 0.25f;  // while playing a level
+    public float pausedFactor = 0.3f;  // how much quieter when paused / on result cards
+    public float fadeSpeed = 0.5f;     // how fast volume changes (per second)
+
+    [Header("SFX volume")]
+    [Range(0f, 1f)] public float clickVolume = 0.6f;
+    [Range(0f, 1f)] public float crashVolume = 1f;
+    [Range(0f, 1f)] public float fallVolume = 1f;
+    [Range(0f, 1f)] public float stampVolume = 1f;
+    [Range(0f, 1f)] public float completeVolume = 0.8f;
+
+    float target;   // the volume we're gliding towards
+    bool paused;
+    bool inLevel;
 
     void Awake()
     {
@@ -19,42 +36,64 @@ public class AudioManager : MonoBehaviour
         if (I != null) { Destroy(gameObject); return; }
         I = this;
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    System.Collections.IEnumerator Start()
+    void OnDestroy()
     {
+        if (I == this) SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // a scene with a GameManager is a level
+        inLevel = FindObjectOfType<GameManager>() != null;
+        paused = false;
+        UpdateTarget();
+    }
+
+    void Start()
+    {
+        if (I != this) return;   // extra copies do nothing
+
         musicSource.clip = music;
         musicSource.loop = true;
-        musicSource.volume = 0f;
+        musicSource.volume = 0f;   // starts silent, then glides up = fade-in
         musicSource.Play();
+        UpdateTarget();
+    }
 
-        // fade in over 1.5 seconds, only when the game first starts
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.unscaledDeltaTime / 1.5f;
-            musicSource.volume = Mathf.Lerp(0f, musicVolume, t);
-            yield return null;
-        }
+    void Update()
+    {
+        if (I != this) return;
+        // smoothly move towards the target volume (works even when the game is paused)
+        musicSource.volume = Mathf.MoveTowards(musicSource.volume, target, fadeSpeed * Time.unscaledDeltaTime);
+    }
+
+    void UpdateTarget()
+    {
+        float baseVol = inLevel ? levelVolume : menuVolume;
+        target = paused ? baseVol * pausedFactor : baseVol;
     }
 
     public static void Play(Sfx s)
     {
         if (I == null) return;
-        AudioClip c = s switch
+        (AudioClip c, float v) = s switch
         {
-            Sfx.Click => I.click,
-            Sfx.Crash => I.crash,
-            Sfx.Fall => I.fall,
-            Sfx.Stamp => I.stamp,
-            _ => I.complete,
+            Sfx.Click => (I.click, I.clickVolume),
+            Sfx.Crash => (I.crash, I.crashVolume),
+            Sfx.Fall => (I.fall, I.fallVolume),
+            Sfx.Stamp => (I.stamp, I.stampVolume),
+            _ => (I.complete, I.completeVolume),
         };
-        if (c != null) I.sfxSource.PlayOneShot(c);
+        if (c != null) I.sfxSource.PlayOneShot(c, v);
     }
 
-    public static void SetPaused(bool paused)
+    public static void SetPaused(bool value)
     {
         if (I == null) return;
-        I.musicSource.volume = paused ? I.musicVolume * 0.3f : I.musicVolume;
+        I.paused = value;
+        I.UpdateTarget();
     }
 }

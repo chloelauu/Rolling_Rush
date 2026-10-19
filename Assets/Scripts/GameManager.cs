@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         State = GameState.Lost;
+        AudioManager.Play(fell ? AudioManager.Sfx.Fall : AudioManager.Sfx.Crash);
         crashTitle.text = fell ? "LEFT THE SHEET" : "COLLISION DETECTED";
         crashDistance = player.position.z;
         Invoke(nameof(ShowGameOver), settings.restartDelay);
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
         distanceText.text = distance.ToString("0") + " m";
         bestText.text = best.ToString("0") + " m";
         newRecordStamp.SetActive(newBest);
+        AudioManager.SetPaused(true);
 
         pauseButton.SetActive(false);
         levelText.transform.parent.gameObject.SetActive(false);
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
         float t = Time.timeSinceLevelLoad;
         pauseTimeText.text = "T = " + ((int)(t / 60)).ToString("00") + ":" + (t % 60).ToString("00.0");
         pauseUI.SetActive(true);
+        AudioManager.SetPaused(true);
         pauseButton.SetActive(false);
     }
 
@@ -115,17 +118,20 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         pauseUI.SetActive(false);
         pauseButton.SetActive(true);
+        AudioManager.SetPaused(false);
     }
 
     public void RestartLevel()
     {
         Time.timeScale = 1f;
+        AudioManager.SetPaused(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GoToMenu()
     {
         Time.timeScale = 1f;
+        AudioManager.SetPaused(false);
         SceneManager.LoadScene("Menu");
     }
 
@@ -134,6 +140,7 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
         State = GameState.Won;
+        AudioManager.Play(AudioManager.Sfx.Complete);
         SaveBest(player.position.z, out _);
 
         completeLevelUI.SetActive(true);
@@ -141,6 +148,7 @@ public class GameManager : MonoBehaviour
         hazardText.gameObject.SetActive(false);
         pauseButton.SetActive(false);
         scoreText.SetActive(false);
+        AudioManager.SetPaused(true);
         completeHeader.text = "TEST REPORT · " + settings.levelName;
 
         if (settings.isFinalLevel)
@@ -157,6 +165,7 @@ public class GameManager : MonoBehaviour
 
     void LoadNextLevel()
     {
+        AudioManager.SetPaused(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
