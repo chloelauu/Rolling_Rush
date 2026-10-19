@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         // debug shortcuts (editor only, not included in builds)
         if (Input.GetKeyDown(KeyCode.F1)) CompleteLevel();   // instant level complete
         if (Input.GetKeyDown(KeyCode.F2)) EndGame();         // instant game over
+        if (Input.GetKeyDown(KeyCode.F3)) ScreenCapture.CaptureScreenshot("Screenshot_" + System.DateTime.Now.Ticks + ".png", 2);   // screenshot
     #endif
     }
 
